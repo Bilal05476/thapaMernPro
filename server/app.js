@@ -1,5 +1,22 @@
 const express = require("express");
 const app = express();
+const mongoose = require('mongoose');
+
+/*MongoDB Cred*/
+const mongoUser = process.env.MONGO_USER_ID;
+const mongoKey = process.env.MONGO_USER_KEY;
+
+//MongoDB Connected
+const DB = `mongodb+srv://${mongoUser}:${mongoKey}@cluster0.ekzjc.mongodb.net/thapamernDB?retryWrites=true&w=majority`;
+
+mongoose.connect(DB, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+}).then(() =>{
+  console.log("MongoDB Connected")
+}).catch((err) => console.log(err.message));
 
 //Middleware
 
