@@ -1,22 +1,12 @@
 const express = require("express");
 const app = express();
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
-/*MongoDB Cred*/
-const mongoUser = process.env.MONGO_USER_ID;
-const mongoKey = process.env.MONGO_USER_KEY;
+dotenv.config({ path: "./config.env" });
+require("./DB/conn");
 
-//MongoDB Connected
-const DB = `mongodb+srv://${mongoUser}:${mongoKey}@cluster0.ekzjc.mongodb.net/thapamernDB?retryWrites=true&w=majority`;
-
-mongoose.connect(DB, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
-}).then(() =>{
-  console.log("MongoDB Connected")
-}).catch((err) => console.log(err.message));
+const PORT = process.env.PORT;
 
 //Middleware
 
@@ -42,5 +32,5 @@ app.get("/signup", (req, res) => {
 });
 
 app.listen(3001, () => {
-  console.log("Server is running at port 3001");
+  console.log(`Server is running at port ${PORT}`);
 });
