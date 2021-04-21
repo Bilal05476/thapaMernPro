@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "./config.env" });
+
 require("./DB/conn");
+// const User = require("./model/userSchema");
 
 const PORT = process.env.PORT;
 
