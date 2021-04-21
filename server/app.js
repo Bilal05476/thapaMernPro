@@ -1,17 +1,21 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "./config.env" });
 
+// Import Database connection
 require("./DB/conn");
-// const User = require("./model/userSchema");
+
+// Convert Data into Json
+app.use(express.json());
+
+// link routes
+app.use(require("./routes/auth"));
 
 const PORT = process.env.PORT;
 
 //Middleware
-
 const middleWare = (req, res, next) => {
   console.log("MiddleWare");
   next();
@@ -33,6 +37,6 @@ app.get("/signup", (req, res) => {
   res.send("Hello World from SignUp");
 });
 
-app.listen(3001, () => {
+app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
 });
