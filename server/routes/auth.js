@@ -38,7 +38,7 @@ router.post("/register", async (req, res) => {
   const { name, email, phone, work, password, cPassword } = req.body;
 
   if (!name || !email || !phone || !work || !password || !cPassword) {
-    return res.status(422).json({ error: "Plz enter all fields" });
+    return res.status(422).json({ error: "Enter all fields" });
   }
   try {
     const userExist = await User.findOne({ email: email });
@@ -53,6 +53,24 @@ router.post("/register", async (req, res) => {
       res.status(201).json({ message: "Successfully Registered" });
     } else {
       res.status(500).json({ error: "Failed Registration" });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post("/signin", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ error: "Enter all fields" });
+  }
+  try {
+    const userLogin = await User.findOne({ email: email });
+    if (!userLogin) {
+      res.status(400).json({ error: "User Error" });
+    } else {
+      res.status(200).json({ message: "Login Success" });
     }
   } catch (err) {
     console.log(err);
