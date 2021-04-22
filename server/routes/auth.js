@@ -47,6 +47,7 @@ router.post("/register", async (req, res) => {
     }
 
     const user = new User({ name, email, phone, work, password, cPassword });
+
     const userRegister = await user.save();
 
     if (userRegister) {
