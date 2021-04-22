@@ -5,7 +5,7 @@ require("../DB/conn");
 const User = require("../model/userSchema");
 
 router.get("/", (req, res) => {
-  res.send("Hello World from Server");
+  res.send("Hello World");
 });
 
 //Promises Method, Callback Hell

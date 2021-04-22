@@ -21,21 +21,21 @@ const middleWare = (req, res, next) => {
   next();
 };
 
-app.get("/", (req, res) => {
-  res.send("Hello World from Server");
-});
-app.get("/about", middleWare, (req, res) => {
-  res.send("Hello World from About");
-});
-app.get("/contact", (req, res) => {
-  res.send("Hello World from Contact");
-});
-app.get("/signin", (req, res) => {
-  res.send("Hello World from SignIn");
-});
-app.get("/signup", (req, res) => {
-  res.send("Hello World from SignUp");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello World from Server");
+// });
+// app.get("/about", middleWare, (req, res) => {
+//   res.send("Hello World from About");
+// });
+// app.get("/contact", (req, res) => {
+//   res.send("Hello World from Contact");
+// });
+// app.get("/signin", (req, res) => {
+//   res.send("Hello World from SignIn");
+// });
+// app.get("/signup", (req, res) => {
+//   res.send("Hello World from SignUp");
+// });
 
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
