@@ -46,16 +46,14 @@ router.post("/register", async (req, res) => {
       return res.status(422).json({ error: "Email already Exist" });
     } else if (password != cPassword) {
       return res.status(422).json({ error: "Password are not matching" });
-    }
-
-    const user = new User({ name, email, phone, work, password, cPassword });
-
-    const userRegister = await user.save();
-
-    if (userRegister) {
-      res.status(201).json({ message: "Successfully Registered" });
     } else {
-      res.status(500).json({ error: "Failed Registration" });
+      const user = new User({ name, email, phone, work, password, cPassword });
+      const userRegister = await user.save();
+      if (userRegister) {
+        res.status(201).json({ message: "Successfully Registered" });
+      } else {
+        res.status(500).json({ error: "Failed Registration" });
+      }
     }
   } catch (err) {
     console.log(err);
