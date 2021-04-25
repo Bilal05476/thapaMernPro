@@ -26,6 +26,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 //Password Hashing
@@ -36,6 +44,15 @@ userSchema.pre("save", async function (next) {
   }
   next();
 });
+
+//we are generating token
+userSchema.method.generateAuthToken = async function () {
+  try {
+    let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const User = mongoose.model("USER", userSchema);
 
