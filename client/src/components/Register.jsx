@@ -98,7 +98,7 @@ const Register = () => {
               <img src={SignUp} alt="Sign Up" />
             </figure>
             <NavLink to="/login" className="imageLink">
-              I am already Rgister
+              I am already Register
             </NavLink>
           </div>
         </div>
