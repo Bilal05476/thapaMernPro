@@ -25,29 +25,33 @@ const Register = () => {
     e.preventDefault();
     const { name, email, phone, work, password, cPassword } = user;
 
-    const res = await fetch("/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-        work,
-        password,
-        cPassword,
-      }),
-    });
-    const data = await res.json();
-    if (data.status === 422 || !data) {
-      window.alert("Invalid Registration");
-      console.log("Invalid Registration");
-    } else {
-      window.alert("Registration Success");
-      console.log("Registration Success");
-      history.push("/login");
+    async function dummyFunc() {
+      const res = await fetch("/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          work,
+          password,
+          cPassword,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.status === 422 || !data) {
+        window.alert("Invalid Registration");
+        console.log("Invalid Registration");
+      } else {
+        window.alert("Registration Success");
+        console.log("Registration Success");
+        history.push("/login");
+      }
     }
+    dummyFunc();
   };
 
   return (
@@ -59,7 +63,7 @@ const Register = () => {
             <form method="POST" className="register__form" id="register__form">
               <div className="form-group">
                 <label htmlFor="name">
-                  <i class="zmdi zmdi-account"></i>
+                  <i className="zmdi zmdi-account"></i>
                 </label>
                 <input
                   type="text"
@@ -73,7 +77,7 @@ const Register = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="email">
-                  <i class="zmdi zmdi-email"></i>
+                  <i className="zmdi zmdi-email"></i>
                 </label>
                 <input
                   type="email"
@@ -87,7 +91,7 @@ const Register = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="phone">
-                  <i class="zmdi zmdi-phone"></i>
+                  <i className="zmdi zmdi-phone"></i>
                 </label>
                 <input
                   type="text"
@@ -101,7 +105,7 @@ const Register = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="work">
-                  <i class="zmdi zmdi-slideshow"></i>
+                  <i className="zmdi zmdi-slideshow"></i>
                 </label>
                 <input
                   type="text"
@@ -115,7 +119,7 @@ const Register = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="password">
-                  <i class="zmdi zmdi-key"></i>
+                  <i className="zmdi zmdi-key"></i>
                 </label>
                 <input
                   type="password"
@@ -129,7 +133,7 @@ const Register = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="cPassword">
-                  <i class="zmdi zmdi-key"></i>
+                  <i className="zmdi zmdi-key"></i>
                 </label>
                 <input
                   type="password"
