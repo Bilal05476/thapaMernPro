@@ -1,9 +1,10 @@
 import SignUp from "../img/signup.png";
-import { NavLink } from "react-router-dom";
+import { NavLink , useHistory} from "react-router-dom";
 import "./css/SignUp.css";
 import { useState } from "react";
 
 const Register = () => {
+  const history = useHistory();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -31,9 +32,18 @@ const Register = () => {
       body: JSON.stringify ({
         name, email, phone, work, password, cPassword
       })
-    })
+    });
+    const data = await res.json();
+    if(data.status === 422 || !data){
+      window.alert("Invalid Registration")
+      console.log("Invalid Registration")
+    }
+    else{
+      window.alert("Registration Success")
+      console.log("Registration Success")
+      history.push('/login');
+    }
   }
-
 
   return (
     <div className="signup">
