@@ -1,5 +1,5 @@
 import SignUp from "../img/signup.png";
-import { NavLink , useHistory} from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./css/SignUp.css";
 import { useState } from "react";
 
@@ -23,27 +23,32 @@ const Register = () => {
 
   const postData = (e) => {
     e.preventDefault();
-    const {name, email, phone, work, password, cPassword} = user;
+    const { name, email, phone, work, password, cPassword } = user;
+
     const res = await fetch("/register", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify ({
-        name, email, phone, work, password, cPassword
-      })
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+        work,
+        password,
+        cPassword,
+      }),
     });
     const data = await res.json();
-    if(data.status === 422 || !data){
-      window.alert("Invalid Registration")
-      console.log("Invalid Registration")
+    if (data.status === 422 || !data) {
+      window.alert("Invalid Registration");
+      console.log("Invalid Registration");
+    } else {
+      window.alert("Registration Success");
+      console.log("Registration Success");
+      history.push("/login");
     }
-    else{
-      window.alert("Registration Success")
-      console.log("Registration Success")
-      history.push('/login');
-    }
-  }
+  };
 
   return (
     <div className="signup">
