@@ -20,13 +20,28 @@ const Register = () => {
     setUser({ ...user, [name]: value });
   };
 
+  const postData = (e) => {
+    e.preventDefault();
+    const {name, email, phone, work, password, cPassword} = user;
+    const res = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify ({
+        name, email, phone, work, password, cPassword
+      })
+    })
+  }
+
+
   return (
     <div className="signup">
       <div className="container mt-5">
         <div className="signup__content">
           <div className="signup__form">
             <h2 className="form__title">Sign Up</h2>
-            <form className="register__form" id="register__form">
+            <form method="POST" className="register__form" id="register__form">
               <div className="form-group">
                 <label htmlFor="name">
                   <i class="zmdi zmdi-account"></i>
@@ -118,6 +133,7 @@ const Register = () => {
                   id="signup"
                   className="form__submit"
                   value="Register"
+                  onClick={postData}
                 />
               </div>
             </form>
