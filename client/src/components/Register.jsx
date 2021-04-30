@@ -1,8 +1,25 @@
 import SignUp from "../img/signup.png";
 import { NavLink } from "react-router-dom";
 import "./css/SignUp.css";
+import { useState } from "react";
 
 const Register = () => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    work: "",
+    password: "",
+    cPassword: "",
+  });
+
+  let name, value;
+  const handleInputs = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    setUser({ ...user, [name]: value });
+  };
+
   return (
     <div className="signup">
       <div className="container mt-5">
@@ -18,6 +35,8 @@ const Register = () => {
                   type="text"
                   name="name"
                   id="name"
+                  value={user.name}
+                  onChange={handleInputs}
                   autoComplete="off"
                   placeholder="Your Name"
                 />
@@ -30,6 +49,8 @@ const Register = () => {
                   type="email"
                   name="email"
                   id="email"
+                  value={user.email}
+                  onChange={handleInputs}
                   autoComplete="off"
                   placeholder="Your Email"
                 />
@@ -42,6 +63,8 @@ const Register = () => {
                   type="text"
                   name="phone"
                   id="phone"
+                  value={user.phone}
+                  onChange={handleInputs}
                   autoComplete="off"
                   placeholder="Your Phone"
                 />
@@ -54,6 +77,8 @@ const Register = () => {
                   type="text"
                   name="work"
                   id="work"
+                  value={user.work}
+                  onChange={handleInputs}
                   autoComplete="off"
                   placeholder="Your Profession"
                 />
@@ -66,6 +91,8 @@ const Register = () => {
                   type="password"
                   name="password"
                   id="password"
+                  value={user.password}
+                  onChange={handleInputs}
                   autoComplete="off"
                   placeholder="Your Password"
                 />
@@ -78,6 +105,8 @@ const Register = () => {
                   type="password"
                   name="cPassword"
                   id="cPassword"
+                  value={user.cPassword}
+                  onChange={handleInputs}
                   autoComplete="off"
                   placeholder="Confirm Password"
                 />
