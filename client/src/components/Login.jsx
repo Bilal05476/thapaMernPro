@@ -1,9 +1,10 @@
 import SignIn from "../img/login.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./css/Login.css";
 import { useState } from "react";
 
 const Login = () => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,6 +20,13 @@ const Login = () => {
         password,
       }),
     });
+    const data = await res.json();
+    if (data.status === 400 || !data) {
+      window.alert("Invalid Credentials");
+    } else {
+      window.alert("Login Success");
+      history.push("/");
+    }
   };
 
   return (
@@ -27,7 +35,7 @@ const Login = () => {
         <div className="login__content">
           <div className="login__form">
             <h2 className="form__title">Sign In</h2>
-            <form methpd="POST" className="login__form" id="login__form">
+            <form method="POST" className="login__form" id="login__form">
               <div className="form-group">
                 <label htmlFor="email">
                   <i class="zmdi zmdi-email"></i>
