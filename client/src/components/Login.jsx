@@ -1,15 +1,33 @@
 import SignIn from "../img/login.jpg";
 import { NavLink } from "react-router-dom";
 import "./css/Login.css";
+import { useState } from "react";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const loginUser = async (e) => {
+    e.preventDefault();
+    const res = await fetch("/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+  };
+
   return (
     <div className="login">
       <div className="container mt-5">
         <div className="login__content">
           <div className="login__form">
             <h2 className="form__title">Sign In</h2>
-            <form className="login__form" id="login__form">
+            <form methpd="POST" className="login__form" id="login__form">
               <div className="form-group">
                 <label htmlFor="email">
                   <i class="zmdi zmdi-email"></i>
@@ -20,6 +38,8 @@ const Login = () => {
                   id="email"
                   autoComplete="off"
                   placeholder="Your Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="form-group">
@@ -32,6 +52,8 @@ const Login = () => {
                   id="password"
                   autoComplete="off"
                   placeholder="Your Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div className="form-group form__button">
@@ -41,6 +63,7 @@ const Login = () => {
                   id="login"
                   className="form__submit"
                   value="Login"
+                  onClick={loginUser}
                 />
               </div>
             </form>
