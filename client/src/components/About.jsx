@@ -15,7 +15,7 @@ const About = () => {
         credentials: "include",
       });
       const data = await res.json();
-      if (!res.status === 200) {
+      if (!data.status === 200) {
         throw new Error(res.error);
       }
     } catch (err) {
