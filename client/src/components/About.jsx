@@ -5,7 +5,7 @@ import avatar from "../img/avatar.png";
 
 const About = () => {
   const history = useHistory();
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState({});
 
   const callAboutPage = async () => {
     try {
