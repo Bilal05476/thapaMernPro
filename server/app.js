@@ -15,21 +15,13 @@ app.use(require("./routes/auth"));
 
 const PORT = process.env.PORT;
 
-//Middleware
-const middleWare = (req, res, next) => {
-  console.log("MiddleWare");
-  next();
-};
 
-// app.get("/", (req, res) => {
-//   res.send("Hello World from Server");
-// });
 // app.get("/about", middleWare, (req, res) => {
 //   res.send("Hello World from About");
 // });
-// app.get("/contact", (req, res) => {
-//   res.send("Hello World from Contact");
-// });
+app.get("/contact", (req, res) => {
+  res.send("Hello World from Contact");
+});
 // app.get("/signin", (req, res) => {
 //   res.send("Hello World from SignIn");
 // });
