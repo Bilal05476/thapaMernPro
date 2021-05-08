@@ -1,6 +1,31 @@
 import "./css/Contact.css";
+import { useEffect, useState } from "react";
 
 const Contact = () => {
+  const [userData, setUserData] = useState({});
+
+  const callContactPage = async () => {
+    try {
+      const res = await fetch("/getdata", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      setUserData(data);
+      if (!res.status === 200) {
+        throw new Error(res.error);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    callContactPage();
+  }, []);
+
   return (
     <>
       <div className="contact__info">
@@ -43,6 +68,7 @@ const Contact = () => {
                   <div className="contact__form__name d-flex justify-content-between align-items-between">
                     <input
                       type="text"
+                      value={userData.name}
                       id="contact__form__name"
                       className="contact__form__name input__field"
                       placeholder="Your name"
@@ -50,6 +76,7 @@ const Contact = () => {
                     />
                     <input
                       type="email"
+                      value={userData.email}
                       id="contact__form__email"
                       className="contact__form__email input__field"
                       placeholder="Your Email"
@@ -57,6 +84,7 @@ const Contact = () => {
                     />
                     <input
                       type="number"
+                      value={userData.phone}
                       id="contact__form__phone"
                       className="contact__form__phone input__field"
                       placeholder="Your Phone Number"

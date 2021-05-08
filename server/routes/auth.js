@@ -64,18 +64,19 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ error: "Enter all fields" });
-  }
   try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "Enter all fields" });
+    }
     const userLogin = await User.findOne({ email: email });
     if (userLogin) {
       const isMatch = await bcrypt.compare(password, userLogin.password);
 
       const token = await userLogin.generateAuthToken();
       console.log(token);
+
       res.cookie("jwtoken", token, {
         expires: new Date(Date.now() + 25892000000),
         httpOnly: true,
@@ -84,7 +85,7 @@ router.post("/signin", async (req, res) => {
       if (!isMatch) {
         res.status(400).json({ error: "Invalid Credientials" });
       } else {
-        res.status(200).json({ message: "Login Success" });
+        res.json({ message: "Login Success" });
       }
     } else {
       res.status(400).json({ error: "Invalid Credientials" });
@@ -95,6 +96,10 @@ router.post("/signin", async (req, res) => {
 });
 
 router.get("/about", authenticate, (req, res) => {
+  res.send(req.rootUser);
+});
+
+router.get("/getdata", authenticate, (req, res) => {
   res.send(req.rootUser);
 });
 
